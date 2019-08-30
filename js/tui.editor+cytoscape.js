@@ -7,6 +7,7 @@ var editor = new tui.Editor({
 });
 editor.setMarkdown(`
 \`\`\`cytoscape
-https://raw.githubusercontent.com/taurenshaman/taurenshaman.github.io/master/data/cytoscape-0.json
+data: https://raw.githubusercontent.com/taurenshaman/taurenshaman.github.io/master/data/cytoscape-0.json
+layout: grid
 \`\`\`
 `);

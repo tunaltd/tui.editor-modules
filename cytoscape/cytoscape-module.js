@@ -202,9 +202,9 @@ function initCytoscape(data, wrapperId, layoutName) {
     divSettings.classList.add('flex-justify-center');
     divSettings.classList.add('text-center');
     // cy layout
-    const divCyLayout = document.createElement('div');
-    initCyLayout(divCyLayout, wrapperId);
-    divSettings.appendChild(divCyLayout);
+    // const divCyLayout = document.createElement('div');
+    // initCyLayout(divCyLayout, wrapperId);
+    // divSettings.appendChild(divCyLayout);
 
     // fullscreen
     const btnFullscreen = document.createElement('button');
@@ -230,9 +230,50 @@ function initCytoscape(data, wrapperId, layoutName) {
 }
 
 
+
+/*
+Markdown example: 
+```cytoscape
+data: https://raw.githubusercontent.com/taurenshaman/taurenshaman.github.io/master/data/cytoscape-0.json
+layout: random
+```
+*/
 tui.Editor.defineExtension('cytoscape', function() {
-    tui.Editor.codeBlockManager.setReplacer('cytoscape', function(dataUri) {
-        //var wrapperId = 'cy' + Math.random().toString(36).substr(2, 10);
+    tui.Editor.codeBlockManager.setReplacer('cytoscape', function(data) {
+        var lines = data.match(/^.*((\r\n|\n|\r)|$)/gm);
+        var dataUri, layoutName;
+        if(lines && lines.length > 0){
+            lines.forEach(element => {
+                console.log(element);
+                if(element.startsWith("dataUri:")){
+                    dataUri = _.replace(element, "dataUri:", "");
+                }
+                else if(element.startsWith("data:")){
+                    dataUri = _.replace(element, "data:", "");
+                }
+                else if(element.startsWith("uri:")){
+                    dataUri = _.replace(element, "uri:", "");
+                }
+                else if(element.startsWith("layoutName:")){
+                    layoutName = _.replace(element, "layoutName:", "");
+                }
+                else if(element.startsWith("layout:")){
+                    layoutName = _.replace(element, "layout:", "");
+                }
+                else{
+                    dataUri = "https://raw.githubusercontent.com/taurenshaman/taurenshaman.github.io/master/data/cytoscape-0.json";
+                }
+                
+            });
+            dataUri = _.trim(dataUri);
+            layoutName = _.trim(layoutName);
+            console.log("dataUri: " + dataUri);
+            console.log("layoutName: " + layoutName);
+        }
+        else{
+            dataUri = "https://raw.githubusercontent.com/taurenshaman/taurenshaman.github.io/master/data/cytoscape-0.json";
+            layoutName = "cose";
+        }
 
         var uriHash = computeHash(dataUri);// + "#" + layoutName
         var wrapperId = "divCy_" + uriHash;
