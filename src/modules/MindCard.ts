@@ -178,7 +178,7 @@ tui.Editor.defineExtension(module_LoreCard_Mind.ModuleName, function () {
         }
 
         var uriHash = CommonUtitlity.ComputeHash(dataUri);
-        var wrapperId = "divCy_" + uriHash;
+        var wrapperId = "divLoreMind_" + uriHash;
         //var exists = document.getElementById(wrapperId + "_wrapper");
         //if (exists) {
         //    return;

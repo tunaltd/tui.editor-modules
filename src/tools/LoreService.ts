@@ -74,9 +74,16 @@ class LoreService {
     }
 
     static getUri_Author_FromNoteLink(noteLink: string) {
+        var tmpPrefix = LoreService.uriPrefix;
+        if (noteLink.startsWith("https://localhost")) {
+            tmpPrefix = "https://localhost:44356/";
+        }
+
         // https://localhost:44356/jerin/mind/f21703588cca4cea96f8931442e3df22
-        var link = noteLink.substring(0, noteLink.length - 38); // 32+1+4+1=38
-        return link;
+        var link = noteLink.substring(tmpPrefix.length); // 32+1+4+1=38
+        var index = link.indexOf("/");
+        var authorName = link.substring(0, index);
+        return tmpPrefix + authorName;
     }
 
     static getUserName_FromAuthorLink(authorLink: string) {
