@@ -93,4 +93,16 @@ class LoreService {
     }
 
 
+    static fitDialog(json): any {
+        var agents = json.agents;
+        _.forEach(json.items, (item) => {
+            var agentId = item.agentId;
+            var agent = _.find(agents, function (o) { return o.id === agentId; });
+            item.name = agent.name;
+            item.avatar = "https://robohash.org/" + agentId + ".png"; //Utility.generateAvatarByName_Robot("", agent.name);
+            item.time = new Date(item.time)
+        });
+        return json.items;
+    }
+
 }

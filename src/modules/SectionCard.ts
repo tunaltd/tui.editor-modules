@@ -93,7 +93,6 @@ class SectionCard extends ModuleBase {
         btnTitle.innerText = "Lore"; //data.title;
         btnTitle.href = noteLink;
         btnTitle.target = "_blank";
-        //divTitle.appendChild(btnTitle);
 
         var authorLink = LoreService.getUri_Author_FromNoteLink(noteLink);
         const btnAuthor = document.createElement("a");
@@ -105,20 +104,14 @@ class SectionCard extends ModuleBase {
         btnAuthor.href = authorLink;
         btnAuthor.target = "_blank";
 
-        // fullscreen
-        //const btnFullscreen = document.createElement("button");
-        //this.setupFullScreen(wrapperId, btnFullscreen);
-
         const divSettings = document.createElement("div");
         divSettings.classList.add("mt-3", "d-flex", "flex-justify-center", "flex-align-center");
         divSettings.appendChild(btnAuthor);
         divSettings.appendChild(btnTitle);
-        //divSettings.appendChild(btnFullscreen);
 
         wrapper.innerHTML = "";
         wrapper.appendChild(divSection);
         wrapper.appendChild(divSettings);
-        //wrapper.classList.add("support-full-screen");
 
         setTimeout(() => {
             // "viewer_" + side + "_" + wrapperId
