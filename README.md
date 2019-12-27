@@ -1,11 +1,32 @@
 # tui.editor-modules
-Some modules for tui.editor
+Some modules for tui.editor.
 
+Source folder structure:  
+
+    |-- apps
+    |   |-- LoreCard.ts
+    |-- fef.metro // Implementation based on metro
+        |-- modules // cards implementation
+        |-- tools // specified tools
+    |-- models
+        |-- ModelData.ts
+    |-- tools
+        |-- CommonUtility.ts
+        |-- LoreService.ts
+    |-- typings // typings for TypeScript
+
+### Explaination
+* the prefix `fef` means Front-end framework
+* TypeScript generates js file: `./src/apps/lore-editor-tui.editor.js`
+* gulp generates minimized js file: `./src/apps/lore-editor-tui.editor.min.js`
+
+### Editor
 The editor lib: [tui.editor](https://github.com/nhn/tui.editors) under [MIT License](https://github.com/nhn/tui.editor/blob/master/LICENSE)
 
-Common:
+### Common
 * [Metro](https://github.com/olton/Metro-UI-CSS) under [MIT License](https://github.com/olton/Metro-UI-CSS/blob/master/LICENSE)
-
-Cytoscape module:
 * [cytoscape.js](https://github.com/cytoscape/cytoscape.js) under [MIT License](https://github.com/cytoscape/cytoscape.js/blob/unstable/LICENSE)
+
+### [archived]
+Cytoscape module:  
 * [demo](http://taurenshaman.github.io/tui.editor+cytoscape.html)

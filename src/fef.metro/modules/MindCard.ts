@@ -1,4 +1,4 @@
-/// <reference path="../apps/LoreCard.ts" />
+/// <reference path="../../apps/LoreCard.ts" />
 /// <reference path="./ModuleBase.ts" />
 
 "use strict";
