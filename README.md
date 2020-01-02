@@ -5,6 +5,7 @@ Source folder structure:
 
     |-- apps
     |   |-- LoreCard.ts
+    |   |-- LoreEditor.ts // set toolbar of tui.editor
     |-- fef.metro // Implementation based on metro
         |-- modules // cards implementation
         |-- tools // specified tools

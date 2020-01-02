@@ -156,24 +156,8 @@ var module_LoreCard_Mind: MindCard = new MindCard();
 
 tui.Editor.defineExtension(module_LoreCard_Mind.ModuleName, function () {
     tui.Editor.codeBlockManager.setReplacer(module_LoreCard_Mind.ModuleName, function (data) {
-        var lines = data.match(/^.*((\r\n|\n|\r)|$)/gm);
-        var dataUri;
-        if (lines && lines.length > 0) {
-            lines.forEach(element => {
-                //console.log(element); // ok
-                if (element.startsWith("dataUri:")) {
-                    dataUri = _.replace(element, "dataUri:", "");
-                }
-                else if (element.startsWith("data:")) {
-                    dataUri = _.replace(element, "data:", "");
-                }
-                else if (element.startsWith("uri:")) {
-                    dataUri = _.replace(element, "uri:", "");
-                }
-            });
-            dataUri = _.trim(dataUri);
-        }
-        else {
+        var dataUri = module_LoreCard_Mind.getDataUri(data);
+        if (dataUri.length === 0 || dataUri.indexOf("http") < 0) {
             return "<p class='fg-red'>Invalid format for data uri</p>";
         }
 
