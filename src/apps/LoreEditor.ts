@@ -32,7 +32,7 @@ class LoreEditor{
             className: 'fa fa-accessible-icon',
             event: 'Event_LoreCard_Dialog',
             tooltip: 'LoreCard: Dialog',
-            $el: $('<div class="custom-button"><i class="icon mif-chat-bubble-outline"></i></div>') // fa fa-comments-o
+            $el: $('<div class="custom-button"><i class="icon mif-chat-bubble-outline fg-orange"></i></div>') // fa fa-comments-o
         }, 1);
     }
 
@@ -58,7 +58,7 @@ class LoreEditor{
             className: 'fa fa-accessible-icon',
             event: 'Event_LoreCard_Mind',
             tooltip: 'LoreCard: Mind',
-            $el: $('<div class="custom-button"><i class="icon mif-share"></i></div>') // fa fa-share-alt
+            $el: $('<div class="custom-button"><i class="icon mif-share fg-orange"></i></div>') // fa fa-share-alt
         }, 1);
     }
 
@@ -84,7 +84,7 @@ class LoreEditor{
             className: 'fa fa-accessible-icon',
             event: 'Event_LoreCard_Section',
             tooltip: 'LoreCard: Section',
-            $el: $('<div class="custom-button"><i class="icon mif-book-reference"></i></div>') // fa fa-file-text-o
+            $el: $('<div class="custom-button"><i class="icon mif-book-reference fg-orange"></i></div>') // fa fa-file-text-o
         }, 1);
     }
 

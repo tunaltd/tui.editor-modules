@@ -28,6 +28,7 @@ class LoreService {
             async: true,
             processData: false,
             cache: false,
+            crossDomain: true,
             success: function (data, textStatus, jqXHR) {
                 //data = JSON.parse(jqXHR.responseText);
                 if (typeof callback === "function") {
