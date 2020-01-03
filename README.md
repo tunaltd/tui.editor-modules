@@ -21,6 +21,10 @@ Source folder structure:
 * TypeScript generates js file: `./src/apps/lore-editor-tui.editor.js`
 * gulp generates minimized js file: `./src/apps/lore-editor-tui.editor.min.js`
 
+### Demo
+* Write article with markdown: loggin lore.chuci.info
+* View: [Hello,Article - 20191225](https://taurenshaman.github.io/articles/2019.html)
+
 ### Editor
 The editor lib: [tui.editor](https://github.com/nhn/tui.editors) under [MIT License](https://github.com/nhn/tui.editor/blob/master/LICENSE)
 
