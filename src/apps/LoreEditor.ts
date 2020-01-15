@@ -31,7 +31,7 @@ class LoreEditor{
             name: 'cmdDialog',
             className: 'fa fa-accessible-icon',
             event: 'Event_LoreCard_Dialog',
-            tooltip: 'LoreCard: Dialog',
+            tooltip: 'lore:> dialog',
             $el: $('<div class="custom-button"><i class="icon mif-chat-bubble-outline fg-orange"></i></div>') // fa fa-comments-o
         }, 1);
     }
@@ -57,7 +57,7 @@ class LoreEditor{
             name: 'cmdMind',
             className: 'fa fa-accessible-icon',
             event: 'Event_LoreCard_Mind',
-            tooltip: 'LoreCard: Mind',
+            tooltip: 'lore:> mind',
             $el: $('<div class="custom-button"><i class="icon mif-share fg-orange"></i></div>') // fa fa-share-alt
         }, 1);
     }
@@ -83,8 +83,34 @@ class LoreEditor{
             name: 'cmdSection',
             className: 'fa fa-accessible-icon',
             event: 'Event_LoreCard_Section',
-            tooltip: 'LoreCard: Section',
+            tooltip: 'lore:> section',
             $el: $('<div class="custom-button"><i class="icon mif-book-reference fg-orange"></i></div>') // fa fa-file-text-o
+        }, 1);
+    }
+
+    addToolbarCommand_List() {
+        this.editor.eventManager.addEventType('Event_LoreCard_List');
+        var ctxATC_Section = this;
+        this.editor.eventManager.listen('Event_LoreCard_List', function () {
+            var markdownMode = ctxATC_Section.editor.isMarkdownMode();
+            if (markdownMode === false)
+                return;
+            var content = [
+                '',
+                '```' + 'lorecard.' + ModelData.Type_List,
+                'data: ',
+                '```',
+                ''
+            ].join('\n');
+            ctxATC_Section.editor.insertText(content);
+        });
+
+        this.toolbar.addButton({
+            name: 'cmdSection',
+            className: 'fa fa-accessible-icon',
+            event: 'Event_LoreCard_List',
+            tooltip: 'lore:> list',
+            $el: $('<div class="custom-button"><i class="icon mif-list-numbered fg-orange"></i></div>') // fa fa-file-text-o
         }, 1);
     }
 
@@ -92,5 +118,6 @@ class LoreEditor{
         this.addToolbarCommand_Dialog();
         this.addToolbarCommand_Mind();
         this.addToolbarCommand_Section();
+        this.addToolbarCommand_List();
     }
 }

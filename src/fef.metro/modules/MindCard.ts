@@ -92,33 +92,16 @@ class MindCard extends ModuleBase {
         var divCy = document.getElementById(wrapperId);
 
         var noteLink = LoreService.getUri_NoteLink(dataUri);
-        const btnTitle = document.createElement("a");
-        btnTitle.classList.add("button", "light", "ml-3");
-        btnTitle.style.lineHeight = "100%";
-        btnTitle.style.textDecoration = "none";
-        btnTitle.innerText = "Lore"; //data.title;
-        btnTitle.href = noteLink;
-        btnTitle.target = "_blank";
-        //divTitle.appendChild(btnTitle);
+        const btnNote = this.createLinkButton_Note(noteLink);
 
         var authorLink = LoreService.getUri_Author_FromNoteLink(noteLink);
-        const btnAuthor = document.createElement("a");
-        //<a class="button light" href="/{{author}}"><span class="mif-user"></span> {{author}}</a>
-        btnAuthor.classList.add("button", "light");
-        btnAuthor.style.lineHeight = "100%"; // overrite [.tui-editor-contents :not(table)] in https://uicdn.toast.com/tui-editor/latest/tui-editor-contents.min.css
-        btnAuthor.style.textDecoration = "none"; // overrite [.tui-editor-contents a] in https://uicdn.toast.com/tui-editor/latest/tui-editor-contents.min.css
-        btnAuthor.innerHTML = '<span class="mif-user"></span> ' + LoreService.getUserName_FromAuthorLink(authorLink);
-        btnAuthor.href = authorLink;
-        btnAuthor.target = "_blank";
+        const btnAuthor = this.createLinkButton_Author(authorLink);
 
         // fullscreen
         //const btnFullscreen = document.createElement("button");
         //this.setupFullScreen(wrapperId, btnFullscreen);
 
-        const divSettings = document.createElement("div");
-        divSettings.classList.add("mt-3", "d-flex", "flex-justify-center", "flex-align-center");
-        divSettings.appendChild(btnAuthor);
-        divSettings.appendChild(btnTitle);
+        const divSettings = this.createDiv_Settings(btnNote, btnAuthor);
         //divSettings.appendChild(btnFullscreen);
         
         wrapper.innerHTML = "";
