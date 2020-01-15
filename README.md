@@ -26,7 +26,7 @@ Source folder structure:
 * View: [Hello,Article - 20191225](https://taurenshaman.github.io/articles/2019.html)
 
 ### Editor
-The editor lib: [tui.editor](https://github.com/nhn/tui.editors) under [MIT License](https://github.com/nhn/tui.editor/blob/master/LICENSE)
+The editor lib: [tui.editor](https://github.com/nhn/tui.editor) under [MIT License](https://github.com/nhn/tui.editor/blob/master/LICENSE)
 
 ### Common
 * [Metro](https://github.com/olton/Metro-UI-CSS) under [MIT License](https://github.com/olton/Metro-UI-CSS/blob/master/LICENSE)
