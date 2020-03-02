@@ -1,4 +1,7 @@
 # tui.editor-modules
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/tunaltd/tui.editor-modules.svg)](https://greenkeeper.io/)
+
 Some modules for tui.editor.
 
 Source folder structure:  
