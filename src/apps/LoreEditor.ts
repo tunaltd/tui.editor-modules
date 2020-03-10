@@ -19,7 +19,7 @@ class LoreEditor{
                 return;
             var content = [
                 '',
-                '```' + 'lorecard.' + ModelData.Type_Dialog,
+                '```' + 'lorecard.' + KC.Models.ModelData.Type_Dialog,
                 'data: ',
                 '```',
                 ''
@@ -45,7 +45,7 @@ class LoreEditor{
                 return;
             var content = [
                 '',
-                '```' + 'lorecard.' + ModelData.Type_Mind,
+                '```' + 'lorecard.' + KC.Models.ModelData.Type_Mind,
                 'data: ',
                 '```',
                 ''
@@ -71,7 +71,7 @@ class LoreEditor{
                 return;
             var content = [
                 '',
-                '```' + 'lorecard.' + ModelData.Type_Section,
+                '```' + 'lorecard.' + KC.Models.ModelData.Type_Section,
                 'data: ',
                 '```',
                 ''
@@ -97,7 +97,7 @@ class LoreEditor{
                 return;
             var content = [
                 '',
-                '```' + 'lorecard.' + ModelData.Type_List,
+                '```' + 'lorecard.' + KC.Models.ModelData.Type_List,
                 'data: ',
                 '```',
                 ''
