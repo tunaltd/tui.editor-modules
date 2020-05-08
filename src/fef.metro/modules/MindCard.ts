@@ -124,39 +124,37 @@ namespace FEF.Modules {
         }
 
         renderCytoscape(wrapperId, dataUri) {
-            //var ctxGetData = this;
+            let ctx = this;
             LoreCard.api.getNoteByURL(dataUri, (data) => {
                 //console.log(data);
                 //var j = JSON.parse(data);
                 //console.log(j);
-                var cy = module_LoreCard_Mind.initCytoscape(dataUri, data, wrapperId);
+                var cy = ctx.initCytoscape(dataUri, data, wrapperId);
             });
         }
 
     }
 
-    //LoreCard.inititialize();
-    var module_LoreCard_Mind: MindCard = new MindCard();
+    export function MindCardPlugin() {
+        const { Editor } = toastui;
 
-    tui.Editor.defineExtension(module_LoreCard_Mind.ModuleName, function () {
-        tui.Editor.codeBlockManager.setReplacer(module_LoreCard_Mind.ModuleName, function (data) {
+        var module_LoreCard_Mind: MindCard = new MindCard();
+
+        Editor.codeBlockManager.setReplacer(module_LoreCard_Mind.ModuleName, function (data) {
             var dataUri = module_LoreCard_Mind.getDataUri(data);
             if (dataUri.length === 0 || dataUri.indexOf("http") < 0) {
                 return "<p class='fg-red'>Invalid format for data uri</p>";
             }
 
             var uriHash = KC.Tools.CommonUtitlity.ComputeHash(dataUri);
-            var wrapperId = "divLoreMind_" + uriHash;
-            //var exists = document.getElementById(wrapperId + "_wrapper");
-            //if (exists) {
-            //    return;
-            //}
+            var wrapperId = "divLoreSection_" + uriHash;
 
-            setTimeout(module_LoreCard_Mind.renderCytoscape.bind(null, wrapperId, dataUri), 0);
+            setTimeout(module_LoreCard_Mind.renderCytoscape.bind(module_LoreCard_Mind, wrapperId, dataUri), 0);
 
             return '<div id="' + wrapperId + '_wrapper">'
-                + '<div id="' + wrapperId + '" class="w-100 h-100 border bd-default bg-white" style="min-height: 500px; min-width: 500px;"></div>'
+                + '<div id="' + wrapperId + '" class="w-100 h-100 border bd-default bg-white" style="min-height: 520px; min-width: 500px;"></div>'
                 + '</div>';
         });
-    });
+      }
+
 }

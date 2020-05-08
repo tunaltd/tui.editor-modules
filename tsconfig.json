@@ -9,7 +9,7 @@
     "importHelpers": true,
     "declaration": false,
     "noImplicitAny": false,
-    "outFile": "./src/apps/lore-editor-tui.editor.js",
+    "outFile": "./js/lore-editor-tui.editor.js",
     "sourceMap": true,
     "removeComments": true
   }

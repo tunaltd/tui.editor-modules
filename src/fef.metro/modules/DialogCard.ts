@@ -45,6 +45,7 @@ namespace FEF.Modules {
             var authorLink = KC.Tools.LoreService.getUri_Author_FromNoteLink(noteLink);
             const btnAuthor = this.createLinkButton_Author(authorLink);
 
+            const ctxInit = this;
             const btnRefresh = document.createElement("button");
             //<a class="button light" href="/{{author}}"><span class="mif-user"></span> {{author}}</a>
             btnRefresh.classList.add("button", "light");
@@ -52,7 +53,8 @@ namespace FEF.Modules {
             //btnRefresh.style.textDecoration = "none"; // overrite [.tui-editor-contents a] in https://uicdn.toast.com/tui-editor/latest/tui-editor-contents.min.css
             btnRefresh.innerHTML = '<span class="mif-refresh"></span>';
             btnRefresh.onclick = (ev) => {
-                module_LoreCard_Dialog.runChatFlow(wrapperId, data);
+                //module_LoreCard_Dialog.runChatFlow(wrapperId, data);
+                ctxInit.runChatFlow(wrapperId, data);
             };
 
             const divSettings = this.createDiv_Settings(btnNote, btnAuthor);
@@ -70,33 +72,35 @@ namespace FEF.Modules {
         }
 
         renderCard(wrapperId, dataUri) {
-            //var ctxGetData = this;
+            let ctx = this;
             LoreCard.api.getNoteByURL(dataUri, (data) => {
                 KC.Tools.LoreService.fitDialog(data);
-                module_LoreCard_Dialog.initCard(dataUri, data, wrapperId);
+                ctx.initCard(dataUri, data, wrapperId);
             });
         }
 
     }
 
+    export function DialogCardPlugin() {
+        const { Editor } = toastui;
 
-    var module_LoreCard_Dialog: DialogCard = new DialogCard();
+        var module_LoreCard_Dialog: DialogCard = new DialogCard();
 
-    tui.Editor.defineExtension(module_LoreCard_Dialog.ModuleName, function () {
-        tui.Editor.codeBlockManager.setReplacer(module_LoreCard_Dialog.ModuleName, function (data) {
+        Editor.codeBlockManager.setReplacer(module_LoreCard_Dialog.ModuleName, function (data) {
             var dataUri = module_LoreCard_Dialog.getDataUri(data);
             if (dataUri.length === 0 || dataUri.indexOf("http") < 0) {
                 return "<p class='fg-red'>Invalid format for data uri</p>";
             }
 
             var uriHash = KC.Tools.CommonUtitlity.ComputeHash(dataUri);
-            var wrapperId = "divLoreDialog_" + uriHash;
+            var wrapperId = "divLoreSection_" + uriHash;
 
-            setTimeout(module_LoreCard_Dialog.renderCard.bind(null, wrapperId, dataUri), 0);
+            setTimeout(module_LoreCard_Dialog.renderCard.bind(module_LoreCard_Dialog, wrapperId, dataUri), 0);
 
             return '<div id="' + wrapperId + '_wrapper">'
                 + '<div id="' + wrapperId + '" class="w-100 h-100 border bd-default bg-white" style="min-height: 520px; min-width: 500px;"></div>'
                 + '</div>';
         });
-    });
+      }
+
 }

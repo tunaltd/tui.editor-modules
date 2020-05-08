@@ -127,5 +127,28 @@ namespace FEF.Tools {
             return icon;
         }
 
+        public static createTuiViewerUsingFactory(elementId, height, defaultContent): any {
+            const Viewer = toastui.Editor;
+            const { chart, codeSyntaxHighlight, colorSyntax, tableMergedCell, uml } = Viewer.plugin;
+    
+            const chartOptions = {
+                minWidth: 100,
+                maxWidth: 600,
+                minHeight: 100,
+                maxHeight: 300
+            };
+    
+            const viewer = Viewer.factory({
+                el: document.querySelector('#' + elementId),
+                height: typeof height === "undefined" || height.length <= 4 ? '400px' : height,
+                initialValue: defaultContent,
+                viewer: true,
+                usageStatistics: false,
+                plugins: [[chart, chartOptions], codeSyntaxHighlight, tableMergedCell, uml]
+            });
+    
+            return viewer;
+        }
+
     }
 }

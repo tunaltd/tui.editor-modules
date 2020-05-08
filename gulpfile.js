@@ -40,7 +40,7 @@ function minify(cb) {
     //    .pipe(dest("wwwroot/lib/site"));
     //return merge(site, contact);
 
-    var site = src(["./src/apps/lore-editor-tui.editor.js"])
+    var site = src(["./js/lore-editor-tui.editor.js"])
         .pipe(terser())
         //.pipe(concat("wilderblog.min.js"))
         .pipe(rename({ suffix: '.min' }))
@@ -53,5 +53,5 @@ function minify(cb) {
 exports.minify = minify;
 exports.default = function () {
     //watch('src/*.css', css);
-    watch(["./src/apps/lore-editor-tui.editor.js"], series(minify));
+    watch(["./js/lore-editor-tui.editor.js"], series(minify));
 };

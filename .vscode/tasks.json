@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "gulp",
+			"task": "minify",
+			"problemMatcher": [
+				"$gulp-tsc"
+			],
+			"label": "gulp: minify"
+		}
+	]
+}

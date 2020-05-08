@@ -73,32 +73,34 @@ namespace FEF.Modules {
         }
 
         renderCard(wrapperId, dataUri) {
-            //var ctxGetData = this;
+            let ctx = this;
             LoreCard.api.getNoteByURL(dataUri, (data) => {
-                module_LoreCard_List.initCard(dataUri, data, wrapperId);
+                ctx.initCard(dataUri, data, wrapperId);
             });
         }
 
     }
 
+    export function ListCardPlugin() {
+        const { Editor } = toastui;
 
-    var module_LoreCard_List: ListCard = new ListCard();
+        var module_LoreCard_List: ListCard = new ListCard();
 
-    tui.Editor.defineExtension(module_LoreCard_List.ModuleName, function () {
-        tui.Editor.codeBlockManager.setReplacer(module_LoreCard_List.ModuleName, function (data) {
+        Editor.codeBlockManager.setReplacer(module_LoreCard_List.ModuleName, function (data) {
             var dataUri = module_LoreCard_List.getDataUri(data);
             if (dataUri.length === 0 || dataUri.indexOf("http") < 0) {
                 return "<p class='fg-red'>Invalid format for data uri</p>";
             }
 
             var uriHash = KC.Tools.CommonUtitlity.ComputeHash(dataUri);
-            var wrapperId = "divLoreList_" + uriHash;
+            var wrapperId = "divLoreSection_" + uriHash;
 
-            setTimeout(module_LoreCard_List.renderCard.bind(null, wrapperId, dataUri), 0);
+            setTimeout(module_LoreCard_List.renderCard.bind(module_LoreCard_List, wrapperId, dataUri), 0);
 
-            return '<div id="' + wrapperId + '_wrapper" class="clearfix">'
-                + '<div id="' + wrapperId + '" class="w-100 h-100 border bd-default bg-white" style="min-height: 200px; min-width: 500px;"></div>'
+            return '<div id="' + wrapperId + '_wrapper">'
+                + '<div id="' + wrapperId + '" class="w-100 h-100 border bd-default bg-white" style="min-height: 520px; min-width: 500px;"></div>'
                 + '</div>';
         });
-    });
+      }
+
 }

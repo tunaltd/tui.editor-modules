@@ -5,6 +5,7 @@
 
 namespace FEF.Modules {
     export class SectionCard extends ModuleBase {
+
         constructor() {
             super("lorecard.section");
         }
@@ -100,40 +101,28 @@ namespace FEF.Modules {
 
             setTimeout(() => {
                 // "viewer_" + side + "_" + wrapperId
-                var viewerFront = tui.Editor.factory({
-                    el: document.querySelector('#viewer_front_' + wrapperId),
-                    initialEditType: 'markdown',
-                    previewStyle: 'vertical',
-                    height: '400px',
-                    initialValue: data.front.content,
-                    viewer: true,
-                    exts: ['table', 'uml']
-                });
-                var viewerBack = tui.Editor.factory({
-                    el: document.querySelector('#viewer_back_' + wrapperId),
-                    initialEditType: 'markdown',
-                    previewStyle: 'vertical',
-                    height: '400px',
-                    initialValue: data.back.content,
-                    viewer: true,
-                    exts: ['table', 'uml']
-                });
+                const viewerFront = FEF.Tools.UIHelper.createTuiViewerUsingFactory('viewer_front_' + wrapperId, "", data.front ? data.front.content : "");
+                const viewerBack = FEF.Tools.UIHelper.createTuiViewerUsingFactory('viewer_back_' + wrapperId, "", data.back ? data.back.content : "");
             }, 100);
         }
 
         renderCard(wrapperId, dataUri) {
-            //var ctxGetData = this;
+            let ctx = this;
             LoreCard.api.getNoteByURL(dataUri, (data) => {
-                module_LoreCard_Section.initCard(dataUri, data, wrapperId);
+                ctx.initCard(dataUri, data, wrapperId);
             });
         }
 
     }
 
-    var module_LoreCard_Section: SectionCard = new SectionCard();
+    
 
-    tui.Editor.defineExtension(module_LoreCard_Section.ModuleName, function () {
-        tui.Editor.codeBlockManager.setReplacer(module_LoreCard_Section.ModuleName, function (data) {
+    export function SectionCardPlugin() {
+        const { Editor } = toastui;
+
+        var module_LoreCard_Section: SectionCard = new SectionCard();
+
+        Editor.codeBlockManager.setReplacer(module_LoreCard_Section.ModuleName, function (data) {
             var dataUri = module_LoreCard_Section.getDataUri(data);
             if (dataUri.length === 0 || dataUri.indexOf("http") < 0) {
                 return "<p class='fg-red'>Invalid format for data uri</p>";
@@ -142,11 +131,12 @@ namespace FEF.Modules {
             var uriHash = KC.Tools.CommonUtitlity.ComputeHash(dataUri);
             var wrapperId = "divLoreSection_" + uriHash;
 
-            setTimeout(module_LoreCard_Section.renderCard.bind(null, wrapperId, dataUri), 0);
+            setTimeout(module_LoreCard_Section.renderCard.bind(module_LoreCard_Section, wrapperId, dataUri), 0);
 
             return '<div id="' + wrapperId + '_wrapper">'
                 + '<div id="' + wrapperId + '" class="w-100 h-100 border bd-default bg-white" style="min-height: 520px; min-width: 500px;"></div>'
                 + '</div>';
         });
-    });
+      }
+
 }
